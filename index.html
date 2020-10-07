@@ -2,12 +2,61 @@
 <html>
   <head>
     <title>This is the title of the webpage!</title>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.16.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.16.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.12.2"></script>
   </head>
   <body>
       <p>
-      This is an example paragraph. Anything in the <strong>body</strong>
-      tag will appear on the page, just like this <strong>p</strong>
-      tag and its contents.
+      This is the assignment 4 of <strong>Yuttawee Kongtananan</strong>
       </p>
+      <p>
+      And This is an embeded visualization from <strong>Vega-Lite</strong>.
+      </p>
+      <div id="viz">
+      </div>
+      <script>
+          var vlSpec={
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "data": {"url": "https://uiuc-ischool-dataviz.github.io/spring2019online/week02/building_inventory.csv"},
+  
+  "transform":[
+    {"filter":{"field":"Year Acquired","gt":0}},
+    {"filter":{"field":"Year Constructed","gt":0}}
+  ],
+
+  "encoding":{
+    "y":{
+      "field":"Congress Dist",
+      "type":"ordinal",
+      "sort": ["18", "17", "16", "15", "14", "13", "12", "11", "10", "9", "8", "7", "6", "5", "4", "3", "2", "1", "0"]
+      },
+    "x":{
+      "aggregate":"sum",
+      "field":"Square Footage",
+      "type":"quantitative"
+      }
+  },
+
+  "layer":[{
+    "mark":{"type":"bar","orient":"horizontal"}},
+    {"mark": {
+      "type": "text",
+      "align": "left",
+      "baseline": "middle",
+      "dx": 3
+      },
+    "encoding": {
+      "text": {
+        "aggregate":"sum",
+        "field": "Square Footage",
+        "type": "quantitative"}
+        }
+    }
+  ]
+  
+}
+          vegaEmbed('#viz',vlSpec);
+      </script>
   </body>
 </html>
