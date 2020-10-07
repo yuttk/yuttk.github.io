@@ -19,42 +19,23 @@
           var vlSpec={
   "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
   "data": {"url": "https://uiuc-ischool-dataviz.github.io/spring2019online/week02/building_inventory.csv"},
-  
   "transform":[
     {"filter":{"field":"Year Acquired","gt":0}},
     {"filter":{"field":"Year Constructed","gt":0}}
   ],
-
+  "mark":"circle",
   "encoding":{
-    "y":{
-      "field":"Congress Dist",
-      "type":"ordinal",
-      "sort": ["18", "17", "16", "15", "14", "13", "12", "11", "10", "9", "8", "7", "6", "5", "4", "3", "2", "1", "0"]
-      },
     "x":{
-      "aggregate":"sum",
-      "field":"Square Footage",
-      "type":"quantitative"
-      }
-  },
-
-  "layer":[{
-    "mark":{"type":"bar","orient":"horizontal"}},
-    {"mark": {
-      "type": "text",
-      "align": "left",
-      "baseline": "middle",
-      "dx": 3
+      "field":"Year Acquired",
+      "type":"quantitative",
+      "scale": {"domain": [1700, 2100]}
       },
-    "encoding": {
-      "text": {
-        "aggregate":"sum",
-        "field": "Square Footage",
-        "type": "quantitative"}
-        }
-    }
-  ]
-  
+    "y":{
+      "field":"Year Constructed",
+      "type":"quantitative",
+      "scale": {"domain": [1700, 2100]}
+      }
+  }
 }
           vegaEmbed('#viz',vlSpec);
       </script>
